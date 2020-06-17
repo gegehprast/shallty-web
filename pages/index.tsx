@@ -59,13 +59,15 @@ const Home = (): JSX.Element => {
                 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
             </Head>
             
-            <div>
-                Shortlink: {shortlink}
-            </div>
+            <main className="w-full">
+                <div>
+                    Shortlink: {shortlink}
+                </div>
 
-            <div>
-                Parsed: {parsing ? 'Please wait...' : parsed}
-            </div>
+                <div>
+                    Parsed: {parsing ? 'Please wait...' : parsed}
+                </div>
+            </main>
         </div>
     )
 }
