@@ -7,8 +7,8 @@ const host = 'http://localhost:8080/shortlink'
 const client = io(host)
 
 const openInNewTab = (url: string) => {
-    // const win = window.open(url, '_blank')
-    // win.focus()
+    const win = window.open(url, '_blank')
+    win.focus()
 }
 
 interface Parsed {
@@ -40,11 +40,13 @@ const Home = (): JSX.Element => {
 
     useEffect(() => {
         client.on('parse', function (msg: Parsed) {
-            console.log('receiving')
-            console.log(msg)
-            openInNewTab(msg.url)
-            setParsed(msg)
-            setParsing(false)
+            const handler = setTimeout(() => {
+                openInNewTab(msg.url)
+                setParsed(msg)
+                setParsing(false)
+
+                clearTimeout(handler)
+            }, 1500)
         })
 
         inputRef.current.focus()
@@ -55,7 +57,6 @@ const Home = (): JSX.Element => {
             setShortlink(router.query.shortlink ? router.query.shortlink as string : '')
             setParsing(true)
             client.emit('parse', { link: router.query.shortlink })
-            console.log('emitting')
         }
     }, [router.query.shortlink])
 
@@ -111,12 +112,20 @@ const Home = (): JSX.Element => {
                                 onChange={(e) => setShortlink(e.target.value)}
                                 className="relative z-10 w-10/12 p-2 text-xl leading-none border-t-2 border-b-2 border-l-2 rounded-l md:text-3xl text-sh-300 parse-input"
                             />
-                            <button onClick={handleParse}
-                                className="w-2/12 p-2 text-lg leading-none text-center border-t-2 border-b-2 border-r-2 rounded-r md:text-xl text-bold parse-button"
-                                disabled={parsing}
-                            >
-                                Parse
-                            </button>
+                            {parsing ? 
+                                <button onClick={handleParse}
+                                    className="flex items-stretch w-2/12 overflow-hidden border-t-2 border-b-2 border-r-2 rounded-r"
+                                    disabled={true}
+                                >
+                                    <div className="loading-btn">
+                                        <div></div><div></div><div></div>
+                                    </div>
+                                </button> :
+                                <button onClick={handleParse}
+                                    className="w-2/12 p-2 text-lg leading-none text-center border-t-2 border-b-2 border-r-2 rounded-r md:text-xl text-bold parse-button"
+                                >
+                                    Parse
+                                </button>}
                         </div>
 
                         <div className="w-full mt-8 text-gray-700">
