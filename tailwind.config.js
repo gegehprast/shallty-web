@@ -10,6 +10,11 @@ module.exports = {
     },
     theme: {
         extend: {
+            colors: {
+                'sh-100': '#f63975',
+                'sh-200': '#ff3172',
+                'sh-300': '#ff0050',
+            },
             screens: {
                 'xxl-1344': '1344px',
                 'xxl-1920': '1920px',
@@ -54,6 +59,8 @@ module.exports = {
     variants: {
         backgroundColor: ['responsive', 'hover', 'focus', 'active'],
         textColor: ['responsive', 'hover', 'focus', 'visited'],
+        borderWidth: ['responsive', 'hover', 'focus', 'active'],
+        margin: ['responsive', 'hover', 'focus', 'active'],
     },
     plugins: [
         function ({
