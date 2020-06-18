@@ -7,10 +7,10 @@ const host = 'http://localhost:8080/shortlink'
 const client = io(host)
 
 const openInNewTab = (url: string) => {
-    const win = window.open(url, '_blank')
+    const newTab = window.open(url, '_blank')
     
-    if (win) {
-        win.focus()
+    if (newTab) {
+        newTab.focus()
     }
 }
 
