@@ -1,73 +1,8 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import io from 'socket.io-client'
-import { useState, useEffect, useRef } from 'react'
-
-const host = 'http://localhost:8080/shortlink'
-const client = io(host)
-
-const openInNewTab = (url: string) => {
-    const newTab = window.open(url, '_blank')
-    
-    if (newTab) {
-        newTab.focus()
-    }
-}
-
-interface Parsed {
-    id: string
-    success: boolean
-    url: string
-    original: string
-    cached: boolean
-    createdAt: string
-    updatedAt: string
-}
-
-const initialParsed = {
-    id: '',
-    success: false,
-    url: '',
-    original: '',
-    cached: false,
-    createdAt: '',
-    updatedAt: '',
-}
+import Parser from '../components/Parser'
+import Footer from '../components/Footer'
 
 const Home = (): JSX.Element => {
-    const router = useRouter()
-    const [shortlink, setShortlink] = useState(router.query.shortlink ? router.query.shortlink as string : '')
-    const [parsed, setParsed] = useState<Parsed>(initialParsed)
-    const [parsing, setParsing] = useState(false)
-    const inputRef = useRef<HTMLInputElement>(null)
-
-    useEffect(() => {
-        client.on('parse', function (msg: Parsed) {
-            const handler = setTimeout(() => {
-                openInNewTab(msg.url)
-                setParsed(msg)
-                setParsing(false)
-
-                clearTimeout(handler)
-            }, 1500)
-        })
-
-        inputRef.current.focus()
-    }, [])
-
-    useEffect(() => {
-        if (router.query.shortlink && router.query.shortlink.length > 0) {
-            setShortlink(router.query.shortlink ? router.query.shortlink as string : '')
-            setParsing(true)
-            client.emit('parse', { link: router.query.shortlink })
-        }
-    }, [router.query.shortlink])
-
-    const handleParse = () => {
-        setParsing(true)
-        client.emit('parse', { link: shortlink })
-    }
-    
     return (
         <>
             <Head>
@@ -92,7 +27,7 @@ const Home = (): JSX.Element => {
                 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
             </Head>
             
-            <main className="relative flex flex-wrap w-full h-screen bg-center bg-no-repeat bg-cover bg-y-35" 
+            <div className="relative flex flex-wrap w-full h-screen bg-center bg-no-repeat bg-cover bg-y-35" 
                 style={{ backgroundColor: '#d49397' }}
             >
                 <img src="/bg.png" className="absolute object-cover w-full h-screen" 
@@ -108,65 +43,25 @@ const Home = (): JSX.Element => {
                         </h1>
                     </div>
 
-                    <div className="w-full px-2 mb-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
-                        <div className="flex w-full text-center shadow-bs">
-                            <input ref={inputRef}
-                                value={shortlink}
-                                onChange={(e) => setShortlink(e.target.value)}
-                                className="relative z-10 w-10/12 p-2 text-xl leading-none border-t-2 border-b-2 border-l-2 rounded-l md:text-3xl text-sh-300 parse-input"
-                            />
-                            {parsing ? 
-                                <button onClick={handleParse}
-                                    className="flex items-stretch w-2/12 overflow-hidden border-t-2 border-b-2 border-r-2 rounded-r"
-                                    disabled={true}
-                                >
-                                    <div className="loading-btn">
-                                        <div></div><div></div><div></div>
-                                    </div>
-                                </button> :
-                                <button onClick={handleParse}
-                                    className="w-2/12 p-2 text-lg leading-none text-center border-t-2 border-b-2 border-r-2 rounded-r md:text-xl text-bold parse-button"
-                                >
-                                    Parse
-                                </button>}
-                        </div>
+                    <main className="w-full px-2 md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
+                        <Parser />
 
-                        <div className="w-full mt-8 text-gray-700">
-                            <div className="flex flex-row flex-no-wrap items-center rounded-l-full shadow-bs">
-                                <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-lg bg-white rounded-l-full md:w-2/12 md:text-3xl">Parsed</div>
-                                <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-lg font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-3xl">
-                                    {parsing ? 
-                                        <span className="">Tunggu sebentar...</span> : 
-                                        <a href={parsed.url} className="truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" target="_blank" rel="noreferrer">
-                                            {parsed.url}
-                                        </a>
-                                    }
-                                </div>
-                            </div>
-
-                            <div className="flex flex-row flex-no-wrap items-center mt-2 rounded-l-full shadow-bs">
-                                <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-base bg-white rounded-l-full md:w-2/12 md:text-xl">Original</div>
-                                <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
-                                    <span className="truncate">
-                                        {shortlink}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-row flex-no-wrap items-center mt-2 rounded-l-full shadow-bs">
-                                <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-base bg-white rounded-l-full md:w-2/12 md:text-xl">Cached</div>
-                                <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
-                                    {parsing ? 
-                                        <span className="">Tunggu sebentar...</span> : 
-                                        <span className="uppercase">{parsed.cached.toString()}</span>
-                                    }
-                                </div>
+                        <div className="flex w-full pl-1 mt-4">
+                            <div className="flex items-center text-sm md:font-bold md:text-lg hover:text-sh-300">
+                                <svg className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5h2v6H9V5zm0 8h2v2H9v-2z" />
+                                </svg>
+                                &nbsp;
+                                <a href="/help" style={{ textShadow: '10px 6px 15px rgba(0, 0, 0, 1)' }}>
+                                    Bantuan
+                                </a>
                             </div>
                         </div>
-                    </div>
-
+                    </main>
                 </div>
-            </main>
+
+                <Footer />
+            </div>
         </>
     )
 }
