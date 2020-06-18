@@ -38,7 +38,7 @@ const Home = (): JSX.Element => {
 
                 <div className="relative flex flex-row flex-wrap items-center justify-center w-screen mx-auto text-white">
                     <div className="w-full text-center">
-                        <h1 className="text-5xl font-bold md:text-6xl" style={{ textShadow: '10px 6px 15px rgba(0, 0, 0, 1)' }}>
+                        <h1 className="text-5xl font-bold md:text-6xl sh-text-shadow">
                             <span className="text-sh-300">shallty</span><span>.moe</span>
                         </h1>
                     </div>
@@ -52,7 +52,7 @@ const Home = (): JSX.Element => {
                                     <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5h2v6H9V5zm0 8h2v2H9v-2z" />
                                 </svg>
                                 &nbsp;
-                                <a href="/help" style={{ textShadow: '10px 6px 15px rgba(0, 0, 0, 1)' }}>
+                                <a href="/help" className="sh-text-shadow">
                                     Bantuan
                                 </a>
                             </div>

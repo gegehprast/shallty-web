@@ -41,6 +41,10 @@ body {
     transition: background 0s, colors 0s;
 }
 
+.sh-text-shadow {
+    text-shadow: 10px 6px 15px rgba(0, 0, 0, 1);
+}
+
 /* selected text start */
 ::selection {
     @apply text-white bg-sh-300;
