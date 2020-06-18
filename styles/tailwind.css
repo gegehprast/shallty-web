@@ -2,4 +2,49 @@
 
 @tailwind components;
 
+body {
+    @apply font-mono;
+}
+
+.main-overlay {
+    background: rgb(22, 21, 26);
+    background: -moz-linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
+    background: -webkit-linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
+    background: linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#16151a", endColorstr="#16151a", GradientType=1);
+}
+
+.parse-input:focus {
+    @apply outline-none;
+    box-shadow: 0 0 0 0.25rem #ff0050;
+}
+
+.parse-button {
+    background-position: center;
+    transition: background 0.8s, colors 0.8s;
+    background-color: #ff0050;
+    color: white;
+}
+
+.parse-button:hover {
+    background: white radial-gradient(circle, transparent 1%, white 1%) center/15000%;
+    color: #ff0050;
+}
+
+.parse-button:focus {
+    @apply outline-none;
+}
+
+.parse-button:active {
+    background-color: #ff0050;
+    background-size: 100%;
+    transition: background 0s, colors 0s;
+}
+
+/* selected text start */
+::selection {
+    @apply text-white bg-sh-300;
+}
+/* selected text end */
+
 @tailwind utilities;
