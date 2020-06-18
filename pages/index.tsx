@@ -8,7 +8,10 @@ const client = io(host)
 
 const openInNewTab = (url: string) => {
     const win = window.open(url, '_blank')
-    win.focus()
+    
+    if (win) {
+        win.focus()
+    }
 }
 
 interface Parsed {
@@ -68,7 +71,7 @@ const Home = (): JSX.Element => {
     return (
         <>
             <Head>
-                <title>Create Next App</title>
+                <title>shallty.moe</title>
                 
                 <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
                 <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
