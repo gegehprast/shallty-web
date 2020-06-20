@@ -6,18 +6,20 @@ import { toast, TypeOptions, ToastContent, Id } from 'react-toastify'
 import ParserWait from './ParserWait'
 import ErrorAlert from './ErrorAlert'
 import SuccessAlert from './SuccessAlert'
+import InfoAlert from './InfoAlert'
 
 const SUCCESS_TOAST = 'SUCCESS_TOAST'
+const INFO_TOAST = 'INFO_TOAST'
 const ERROR_TOAST = 'ERROR_TOAST'
 const host = 'http://localhost:8080/shortlink'
 const client = io(host)
 
 const openInNewTab = (url: string) => {
-    // const newTab = window.open(url, '_blank')
+    const newTab = window.open(url, '_blank')
 
-    // if (newTab) {
-    //     newTab.focus()
-    // }
+    if (newTab) {
+        newTab.focus()
+    }
 }
 
 interface Parsed {
@@ -41,12 +43,13 @@ const initialParsed = {
     updatedAt: '',
 }
 
-const showToast = (content: ToastContent, { id, type }: { id: Id, type: TypeOptions }) => {
+const showToast = (content: ToastContent, { id, type, delay }: { id: Id, type: TypeOptions, delay?: number }) => {
     toast(content, {
         position: 'bottom-right',
         toastId: id,
         autoClose: false,
         type: type,
+        delay: delay || 0
     })
 }
 
@@ -65,6 +68,7 @@ const Parser = (): JSX.Element => {
     useEffect(() => {
         client.on('parse', function (res: Parsed) {
             dismissToast(SUCCESS_TOAST)
+            dismissToast(INFO_TOAST)
             dismissToast(ERROR_TOAST)
 
             if (res.success) {
@@ -76,9 +80,15 @@ const Parser = (): JSX.Element => {
 
                     setParsing(false)
 
-                    showToast(<SuccessAlert handleReparse={() => handleParse(res.url)} />, {
+                    showToast(<SuccessAlert />, {
                         id: SUCCESS_TOAST,
+                        type: 'success',
+                    })
+
+                    showToast(<InfoAlert handleReparse={() => handleParse(res.url)} />, {
+                        id: INFO_TOAST,
                         type: 'info',
+                        delay: 500,
                     })
 
                     clearTimeout(handler)
