@@ -74,8 +74,6 @@ const Parser = (): JSX.Element => {
             if (res.success) {
                 setError(false)
                 const handler = setTimeout(() => {
-                    openInNewTab(res.url)
-
                     setParsed(res)
 
                     setParsing(false)
@@ -90,6 +88,10 @@ const Parser = (): JSX.Element => {
                         type: 'info',
                         delay: 500,
                     })
+
+                    setTimeout(() => {
+                        openInNewTab(res.url)
+                    }, 1500)
 
                     clearTimeout(handler)
                 }, 1500)
