@@ -6,7 +6,7 @@ const SuccessAlert = ({ handleReparse }: { handleReparse: () => void }): JSX.Ele
                 className="font-bold text-sh-300 hover:text-sh-100"
                 onClick={handleReparse}
             >
-                Klik di sini untuk memulai lagi.
+                Klik di sini untuk mengambil lagi.
             </button>
         </div>
     )
