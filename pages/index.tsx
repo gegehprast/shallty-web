@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Parser from '../components/Parser'
 import Footer from '../components/Footer'
+import { ToastContainer } from 'react-toastify'
 
 const Home = (): JSX.Element => {
     return (
@@ -36,14 +37,15 @@ const Home = (): JSX.Element => {
                 
                 <div className="absolute w-full h-screen main-overlay"></div>
 
-                <div className="relative flex flex-row flex-wrap items-center justify-center w-screen mx-auto text-white">
-                    <div className="w-full text-center">
-                        <h1 className="text-5xl font-bold md:text-6xl sh-text-shadow">
-                            <span className="text-sh-300">shallty</span><span>.moe</span>
-                        </h1>
-                    </div>
+                <div className="relative w-full p-8 mx-auto text-center text-white">
+                    <h1 className="text-5xl font-bold md:text-6xl sh-text-shadow">
+                        <span className="text-sh-300">shallty</span><span>.moe</span>
+                    </h1>
+                </div>
 
-                    <main className="w-full px-2 md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
+                <div className="relative w-full text-white">
+
+                    <main className="px-2 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
                         <Parser />
 
                         <div className="flex w-full pl-1 mt-4">
@@ -62,6 +64,8 @@ const Home = (): JSX.Element => {
 
                 <Footer />
             </div>
+
+            <ToastContainer autoClose={false} />
         </>
     )
 }
