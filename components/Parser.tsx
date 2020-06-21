@@ -11,7 +11,7 @@ import { dismissToast, showToast } from '../utils/toast'
 const SUCCESS_TOAST = 'SUCCESS_TOAST'
 const INFO_TOAST = 'INFO_TOAST'
 const ERROR_TOAST = 'ERROR_TOAST'
-const host = 'http://localhost:8080/shortlink'
+const host = 'https://crawler.shallty.moe/shortlink'
 const client = io(host)
 
 const openInNewTab = (url: string) => {
