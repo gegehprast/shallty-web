@@ -130,7 +130,7 @@ const Parser = (): JSX.Element => {
 
             router.replace({
                 pathname: router.pathname,
-                query: { shortlink: encodedShortlink, parsed: parsed.url, dontFetch: true },
+                query: { shortlink: shortlink, parsed: parsed.url, dontFetch: true },
             }, `/?shortlink=${encodedShortlink}&parsed=${encodedParsed}&dontFetch=true`, { 
                 shallow: true 
             })
