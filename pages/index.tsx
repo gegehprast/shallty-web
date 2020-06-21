@@ -12,7 +12,7 @@ const Home = (): JSX.Element => {
     const router = useRouter()
 
     useEffect(() => {
-        if (maintenance === true) {
+        if (maintenance) {
             router.push('/maintenance')
         }
     }, [router])

@@ -3,8 +3,19 @@ import Link from 'next/link'
 import Footer from '../components/Footer'
 import { ToastContainer } from 'react-toastify'
 import MetaHead from '../components/MetaHead'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { maintenance } from '../config.json'
 
 const Maintenance = (): JSX.Element => {
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!maintenance) {
+            router.push('/')
+        }
+    }, [router])
+
     return (
         <>
             <MetaHead />
