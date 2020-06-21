@@ -26,29 +26,41 @@ const Help = (): JSX.Element => {
                     </h1>
                 </div>
 
-                <div className="relative w-full text-white">
-                    <main className="px-2 mx-auto mb-12 md:mb-0 md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
-                        <h2 className="mb-2 text-lg font-bold md:text-xl">Shortlink yang Didukung:</h2>
+                <div className="relative w-full mb-12 text-white md:mb-0">
+                    <main className="px-2 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
+                        <div>
+                            <h2 className="mb-2 text-lg font-bold md:text-xl">Shortlink yang Didukung</h2>
 
-                        <ol>
-                            <li className="mt-1"> - ahexa</li>
-                            <li className="mt-1"> - anjay</li>
-                            <li className="mt-1"> - coeg</li>
-                            <li className="mt-1"> - euesiherp</li>
-                            <li className="mt-1"> - hexa</li>
-                            <li className="mt-1"> - hightech</li>
-                            <li className="mt-1"> - jelajahinternet</li>
-                            <li className="mt-1"> - kepoow</li>
-                            <li className="mt-1"> - kontenajaib</li>
-                            <li className="mt-1"> - neonime</li>
-                            <li className="mt-1"> - semawur</li>
-                            <li className="mt-1"> - siotong</li>
-                            <li className="mt-1"> - sukakesehatan</li>
-                            <li className="mt-1"> - teknoku</li>
-                            <li className="mt-1"> - telondasmu</li>
-                            <li className="mt-1"> - travellinginfos</li>
-                            <li className="mt-1"> - xmaster</li>
-                        </ol>
+                            <ol>
+                                <li className="mt-1"> - ahexa</li>
+                                <li className="mt-1"> - anjay</li>
+                                <li className="mt-1"> - coeg</li>
+                                <li className="mt-1"> - euesiherp</li>
+                                <li className="mt-1"> - hexa</li>
+                                <li className="mt-1"> - hightech</li>
+                                <li className="mt-1"> - jelajahinternet</li>
+                                <li className="mt-1"> - kepoow</li>
+                                <li className="mt-1"> - kontenajaib</li>
+                                <li className="mt-1"> - neonime</li>
+                                <li className="mt-1"> - semawur</li>
+                                <li className="mt-1"> - siotong</li>
+                                <li className="mt-1"> - sukakesehatan</li>
+                                <li className="mt-1"> - teknoku</li>
+                                <li className="mt-1"> - telondasmu</li>
+                                <li className="mt-1"> - travellinginfos</li>
+                                <li className="mt-1"> - xmaster</li>
+                            </ol>
+                        </div>
+
+                        <div className="mt-12">
+                            <h2 className="mb-2 text-lg font-bold md:text-xl">Lapor bug</h2>
+                            
+                            <span>
+                                Ada yang kurang jelas? Mau lapor bug? Silakan ke <a href="http://bit.ly/ShalltyDiscordServer" className="transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" target="_blank" rel="noreferrer">
+                                    server Discord
+                                </a>.
+                            </span>
+                        </div>
                     </main>
                 </div>
 
