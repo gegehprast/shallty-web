@@ -146,6 +146,8 @@ const Parser = (): JSX.Element => {
                     <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-lg font-bold text-white bg-white bg-opacity-25 md:w-10/12 md:text-3xl">
                         {parsing && <ParserWait />}
 
+                        {!parsing && parsed.url === '' && 'Menunggu...'}
+
                         {(!parsing && error) && <ParserWait />}
 
                         {(!parsing && !error) && <a href={parsed.url} 
@@ -174,7 +176,7 @@ const Parser = (): JSX.Element => {
 
                         {(!parsing && error) && <ParserWait />}
 
-                        {(!parsing && !error) && <>
+                        {(!parsing && !error && parsed.url !== '') && <>
                             <span className="italic uppercase">{parsed.cached.toString()}</span>
                             <div title="Menandakan apakah tautan ini telah diproses sebelumnya.">
                                 <svg className="w-4 h-4 ml-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -182,6 +184,8 @@ const Parser = (): JSX.Element => {
                                 </svg>
                             </div>
                         </>}
+
+                        {(!parsing && !error && parsed.url === '') && 'Menunggu...'}
                     </div>
                 </div>
             </div>
