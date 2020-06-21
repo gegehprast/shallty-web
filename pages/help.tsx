@@ -29,7 +29,7 @@ const Help = (): JSX.Element => {
                 <div className="relative w-full mb-12 text-white md:mb-0">
                     <main className="px-2 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
                         <div>
-                            <h2 className="mb-2 text-lg font-bold md:text-xl">Shortlink yang Didukung</h2>
+                            <h2 className="mb-2 text-lg font-bold md:text-xl">Shortlink yang didukung</h2>
 
                             <ol>
                                 <li className="mt-1"> - ahexa</li>
