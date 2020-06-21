@@ -134,6 +134,7 @@ const Parser = (): JSX.Element => {
                     value={shortlink}
                     onChange={(e) => setShortlink(e.target.value)}
                     className="relative z-10 w-10/12 p-2 text-xl leading-none border-t-2 border-b-2 border-l-2 rounded-l md:text-3xl text-sh-300 parse-input"
+                    placeholder="Masukkan shortlink di sini"
                 />
                 {parsing ?
                     <button
@@ -172,7 +173,7 @@ const Parser = (): JSX.Element => {
                 </div>
 
                 <div className="flex flex-row flex-no-wrap items-center mt-2 rounded-l-full shadow-bs">
-                    <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-base bg-white rounded-l-full md:w-2/12 md:text-xl">Orisinal</div>
+                    <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-base bg-white rounded-l-full md:w-2/12 md:text-xl">Asli</div>
                     <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
                         <span className="truncate">
                             {shortlink.length > 0 ? shortlink : 'Menunggu...'}
@@ -182,12 +183,19 @@ const Parser = (): JSX.Element => {
 
                 <div className="flex flex-row flex-no-wrap items-center mt-2 rounded-l-full shadow-bs">
                     <div className="flex-1 w-3/12 py-1 pl-4 pr-2 text-base bg-white rounded-l-full md:w-2/12 md:text-xl">Cached</div>
-                    <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
+                    <div className="flex flex-no-wrap items-center w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
                         {parsing && <ParserWait />}
 
                         {(!parsing && error) && <ParserWait />}
 
-                        {(!parsing && !error) && <span className="italic uppercase">{parsed.cached.toString()}</span>}
+                        {(!parsing && !error) && <>
+                            <span className="italic uppercase">{parsed.cached.toString()}</span>
+                            <div title="Menandakan apakah tautan ini telah diproses sebelumnya.">
+                                <svg className="w-4 h-4 ml-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm2-13c0 .28-.21.8-.42 1L10 9.58c-.57.58-1 1.6-1 2.42v1h2v-1c0-.29.21-.8.42-1L13 9.42c.57-.58 1-1.6 1-2.42a4 4 0 1 0-8 0h2a2 2 0 1 1 4 0zm-3 8v2h2v-2H9z" />
+                                </svg>
+                            </div>
+                        </>}
                     </div>
                 </div>
             </div>
