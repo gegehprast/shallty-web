@@ -2,11 +2,11 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import io from 'socket.io-client'
 import { useState, useEffect, useRef } from 'react'
-import { toast, TypeOptions, ToastContent, Id } from 'react-toastify'
 import ParserWait from './ParserWait'
 import ErrorAlert from './ErrorAlert'
 import SuccessAlert from './SuccessAlert'
 import InfoAlert from './InfoAlert'
+import { dismissToast, showToast } from '../utils/toast'
 
 const SUCCESS_TOAST = 'SUCCESS_TOAST'
 const INFO_TOAST = 'INFO_TOAST'
@@ -41,20 +41,6 @@ const initialParsed = {
     cached: false,
     createdAt: '',
     updatedAt: '',
-}
-
-const showToast = (content: ToastContent, { id, type, delay }: { id: Id, type: TypeOptions, delay?: number }) => {
-    toast(content, {
-        position: 'bottom-right',
-        toastId: id,
-        autoClose: false,
-        type: type,
-        delay: delay || 0
-    })
-}
-
-const dismissToast = (id: Id) => {
-    toast.dismiss(id)
 }
 
 const Parser = (): JSX.Element => {
