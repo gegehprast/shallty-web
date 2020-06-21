@@ -45,10 +45,10 @@ const initialParsed = {
 
 const Parser = (): JSX.Element => {
     const router = useRouter()
-    const [shortlink, setShortlink] = useState(router.query.shortlink ? router.query.shortlink as string : '')
+    const [shortlink, setShortlink] = useState('')
     const [parsed, setParsed] = useState<Parsed>(initialParsed)
     const [error, setError] = useState(false)
-    const [parsing, setParsing] = useState(true)
+    const [parsing, setParsing] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
@@ -97,20 +97,46 @@ const Parser = (): JSX.Element => {
     }, [])
 
     useEffect(() => {
-        if (router.query.shortlink && router.query.shortlink.length > 0) {
+        if (router.query.parsed) {
+            setParsed(prevParsed => {
+                prevParsed.url = router.query.parsed as string
+                return prevParsed
+            })
+        }
+
+        if (router.query.shortlink) {
             setShortlink(router.query.shortlink as string)
+        }
+
+        if (!router.query.dontFetch && router.query.shortlink && router.query.shortlink.length > 0) {
             setParsing(true)
             client.emit('parse', { link: router.query.shortlink as string })
-        } else {
-            setParsing(false)
         }
-    }, [router.query.shortlink])
+    }, [router.query.shortlink, router.query.parsed, router.query.dontFetch])
 
     const handleParse = (shortlink: string) => {
         router.push({
             pathname: '/',
             query: { shortlink: decodeURIComponent(shortlink) }
         })
+    }
+
+    const handleHelp = (e: React.MouseEvent) => {
+        e.preventDefault()
+
+        if (shortlink) {
+            const encodedShortlink = encodeURIComponent(shortlink)
+            const encodedParsed = encodeURIComponent(parsed.url)
+
+            router.replace({
+                pathname: router.pathname,
+                query: { shortlink: encodedShortlink, parsed: parsed.url, dontFetch: true },
+            }, `/?shortlink=${encodedShortlink}&parsed=${encodedParsed}&dontFetch=true`, { 
+                shallow: true 
+            })
+        }
+
+        router.push('/help', '/help')
     }
 
     return (
@@ -187,6 +213,18 @@ const Parser = (): JSX.Element => {
 
                         {(!parsing && !error && parsed.url === '') && 'Menunggu...'}
                     </div>
+                </div>
+            </div>
+
+            <div className="flex w-full pl-1 mt-4">
+                <div className="flex items-center text-sm md:font-bold md:text-lg hover:text-sh-300">
+                    <svg className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5h2v6H9V5zm0 8h2v2H9v-2z" />
+                    </svg>
+                                &nbsp;
+                    <a href="#" onClick={handleHelp} className="sh-text-shadow">
+                        Bantuan
+                    </a>
                 </div>
             </div>
         </>
