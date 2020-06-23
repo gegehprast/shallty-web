@@ -5,13 +5,12 @@ import { ToastContainer } from 'react-toastify'
 import MetaHead from '../components/MetaHead'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { maintenance } from '../config.json'
 
 const Maintenance = (): JSX.Element => {
     const router = useRouter()
 
     useEffect(() => {
-        if (!maintenance) {
+        if (process.env.NEXT_PUBLIC_MAINTENANCE != 'true') {
             router.push('/')
         }
     }, [router])
