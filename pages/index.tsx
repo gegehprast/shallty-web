@@ -4,14 +4,13 @@ import Footer from '../components/Footer'
 import { ToastContainer } from 'react-toastify'
 import MetaHead from '../components/MetaHead'
 import { useRouter } from 'next/router'
-import { maintenance } from '../config.json'
 import { useEffect } from 'react'
 
 const Home = (): JSX.Element => {
     const router = useRouter()
 
     useEffect(() => {
-        if (maintenance) {
+        if (process.env.NEXT_PUBLIC_MAINTENANCE == 'true') {
             router.push('/maintenance')
         }
     }, [router])
