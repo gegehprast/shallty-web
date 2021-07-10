@@ -40,7 +40,7 @@ const Maintenance = (): JSX.Element => {
 
                 <div className="relative w-full text-white">
                     <main className="px-2 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
-                        <h1 className="text-5xl font-bold md:text-6xl sh-text-shadow">
+                        <h1 className="text-5xl font-bold text-center md:text-6xl sh-text-shadow">
                             Oof! Sedang maintenance.
                         </h1>
                     </main>
