@@ -32,23 +32,8 @@ const Help = (): JSX.Element => {
                             <h2 className="mb-2 text-lg font-bold md:text-xl">Shortlink yang didukung</h2>
 
                             <ol>
-                                <li className="mt-1"> - ahexa</li>
-                                <li className="mt-1"> - anjay</li>
-                                <li className="mt-1"> - coeg</li>
-                                <li className="mt-1"> - euesiherp</li>
-                                <li className="mt-1"> - hexa</li>
-                                <li className="mt-1"> - hightech</li>
-                                <li className="mt-1"> - jelajahinternet</li>
-                                <li className="mt-1"> - kepoow</li>
-                                <li className="mt-1"> - kontenajaib</li>
-                                <li className="mt-1"> - neonime</li>
-                                <li className="mt-1"> - semawur</li>
-                                <li className="mt-1"> - siotong</li>
-                                <li className="mt-1"> - sukakesehatan</li>
                                 <li className="mt-1"> - teknoku</li>
-                                <li className="mt-1"> - telondasmu</li>
-                                <li className="mt-1"> - travellinginfos</li>
-                                <li className="mt-1"> - xmaster</li>
+                                <li className="mt-1"> - drivemoe</li>
                             </ol>
                         </div>
 
@@ -56,7 +41,7 @@ const Help = (): JSX.Element => {
                             <h2 className="mb-2 text-lg font-bold md:text-xl">Lapor bug</h2>
                             
                             <span>
-                                Ada yang kurang jelas? Mau lapor bug? Silakan ke <a href="http://bit.ly/ShalltyDiscordServer" className="transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" target="_blank" rel="noreferrer">
+                                Ada yang kurang jelas? Mau lapor bug? Silakan ke <a href="https://bit.ly/ShalltyDiscord" className="transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" target="_blank" rel="noreferrer">
                                     server Discord
                                 </a>.
                             </span>

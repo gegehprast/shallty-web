@@ -13,7 +13,7 @@ const Footer = ({ textClass, linkClass }: Props): JSX.Element => {
                     © { (new Date).getFullYear() } shallty.moe {process.env.NEXT_PUBLIC_APP_VERSION}
                 </div>
                 <div className="order-first w-full md:text-right md:order-none md:w-1/2">
-                    <a href="http://bit.ly/ShalltyDiscordServer" className={`truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100 ${linkClass}`} target="_blank" rel="noreferrer">
+                    <a href="https://bit.ly/ShalltyDiscord" className={`truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100 ${linkClass}`} target="_blank" rel="noreferrer">
                         Discord
                     </a>
                     <a href="https://github.com/gegehprast/shallty" className={`ml-4 truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100 ${linkClass}`} target="_blank" rel="noreferrer">
