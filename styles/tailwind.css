@@ -3,15 +3,7 @@
 @tailwind components;
 
 body {
-    @apply font-mono;
-}
-
-.main-overlay {
-    background: rgb(22, 21, 26);
-    background: -moz-linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
-    background: -webkit-linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
-    background: linear-gradient(0deg, rgba(22, 21, 26, 1) 0%, rgba(22, 21, 26, 0) 75%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#16151a", endColorstr="#16151a", GradientType=1);
+    @apply font-mono text-white;
 }
 
 .parse-input:focus {
