@@ -7,6 +7,7 @@ import ErrorAlert from './ErrorAlert'
 import SuccessAlert from './SuccessAlert'
 import InfoAlert from './InfoAlert'
 import { dismissToast, showToast } from '../utils/toast'
+import ParserError from './ParserError'
 
 const SUCCESS_TOAST = 'SUCCESS_TOAST'
 const INFO_TOAST = 'INFO_TOAST'
@@ -52,6 +53,7 @@ const Parser = (): JSX.Element => {
 
     useEffect(() => {
         client.on('parse', function (res: Parsed) {
+            // dismiss all toast
             dismissToast(SUCCESS_TOAST)
             dismissToast(INFO_TOAST)
             dismissToast(ERROR_TOAST)
@@ -76,16 +78,16 @@ const Parser = (): JSX.Element => {
 
                     setTimeout(() => {
                         openInNewTab(res.parsed)
-                    }, 1500)
+                    }, 500)
 
                     clearTimeout(handler)
-                }, 1500)
+                }, 500)
             } else {
                 setError(true)
 
                 setParsing(false)
 
-                showToast(<ErrorAlert message={res.error} />, {
+                showToast(<ErrorAlert message={res.error} handleReparse={() => window.location.reload()} />, {
                     id: ERROR_TOAST,
                     type: 'error',
                 })
@@ -120,6 +122,7 @@ const Parser = (): JSX.Element => {
         })
     }
 
+    // this function is to preserve the current result when the user is came back from the help page
     const handleHelp = (e: React.MouseEvent) => {
         e.preventDefault()
 
@@ -171,7 +174,7 @@ const Parser = (): JSX.Element => {
                     <div className="flex flex-no-wrap w-9/12 px-2 py-1 text-lg font-bold text-white bg-white bg-opacity-25 md:w-10/12 md:text-3xl">
                         {parsing && <ParserWait />}
 
-                        {(!parsing && error) && <ParserWait />}
+                        {(!parsing && error) && <ParserError />}
 
                         {(!parsing && !error) && <a href={parsed.parsed} 
                             className="truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" 
@@ -199,7 +202,7 @@ const Parser = (): JSX.Element => {
                     <div className="flex flex-no-wrap items-center w-9/12 px-2 py-1 text-base font-bold text-white bg-white bg-opacity-25 rounded-r md:w-10/12 md:text-xl">
                         {parsing && <ParserWait />}
 
-                        {(!parsing && error) && <ParserWait />}
+                        {(!parsing && error) && <ParserError />}
 
                         {(!parsing && !error && parsed.parsed !== '') && <>
                             <span className="italic uppercase">{parsed.cached.toString()}</span>
