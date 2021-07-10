@@ -25,6 +25,7 @@ body {
 
 .parse-button:focus {
     @apply outline-none;
+    box-shadow: 0 0 0 0.25rem #ff0050;
 }
 
 .parse-button:active {
