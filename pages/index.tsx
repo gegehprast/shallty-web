@@ -44,7 +44,7 @@ const Home = (): JSX.Element => {
                     </div>
 
                     <div className="relative w-full">
-                        <main className="px-2 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
+                        <main className="px-4 mx-auto md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
                             <Parser />
                         </main>
                     </div>
