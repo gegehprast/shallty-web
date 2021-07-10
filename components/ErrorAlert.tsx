@@ -6,13 +6,10 @@ const ErrorAlert = ({ message, handleReparse }: { message: string, handleReparse
             <p className="text-sm font-bold md:text-base">
                 <ParserError />
             </p>
-            <span className="w-full text-sm md:text-base">
+            
+            <p className="w-full mb-1 text-sm md:text-base">
                 {message.replace('Something went wrong. Error: ', '')}
-            </span>
-
-            <br />
-
-            <br />
+            </p>
 
             <button
                 className="font-bold text-sh-300 hover:text-sh-100"
