@@ -4,7 +4,7 @@ import Head from 'next/head'
 const MetaHead = (): JSX.Element => {
     return (
         <Head>
-            <title key="TITLE">shallty.moe</title>
+            <title key="TITLE">shallty.moe | Bypass Short Link Fanshare Indonesia</title>
 
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
             <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
