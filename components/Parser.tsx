@@ -23,20 +23,19 @@ const openInNewTab = (url: string) => {
 }
 
 interface Parsed {
-    url: string
-    id?: string
-    error?: boolean
     success?: boolean
-    original?: string
     cached?: boolean
+    original?: string
+    parsed?: string | null
+    id?: string
     createdAt?: string
     updatedAt?: string
-    message?: string
+    error?: any
 }
 
 const initialParsed = {
     id: '',
-    url: '',
+    parsed: '',
     original: '',
     cached: false,
     createdAt: '',
@@ -69,14 +68,14 @@ const Parser = (): JSX.Element => {
                         type: 'success',
                     })
 
-                    showToast(<InfoAlert handleReparse={() => handleParse(res.url)} />, {
+                    showToast(<InfoAlert handleReparse={() => handleParse(res.parsed)} />, {
                         id: INFO_TOAST,
                         type: 'info',
                         delay: 500,
                     })
 
                     setTimeout(() => {
-                        openInNewTab(res.url)
+                        openInNewTab(res.parsed)
                     }, 1500)
 
                     clearTimeout(handler)
@@ -86,7 +85,7 @@ const Parser = (): JSX.Element => {
 
                 setParsing(false)
 
-                showToast(<ErrorAlert message={res.message} />, {
+                showToast(<ErrorAlert message={res.error} />, {
                     id: ERROR_TOAST,
                     type: 'error',
                 })
@@ -99,7 +98,7 @@ const Parser = (): JSX.Element => {
     useEffect(() => {
         if (router.query.parsed) {
             setParsed(prevParsed => {
-                prevParsed.url = router.query.parsed as string
+                prevParsed.parsed = router.query.parsed as string
                 return prevParsed
             })
         }
@@ -126,11 +125,11 @@ const Parser = (): JSX.Element => {
 
         if (shortlink) {
             const encodedShortlink = encodeURIComponent(shortlink)
-            const encodedParsed = encodeURIComponent(parsed.url)
+            const encodedParsed = encodeURIComponent(parsed.parsed)
 
             router.replace({
                 pathname: router.pathname,
-                query: { shortlink: shortlink, parsed: parsed.url, dontFetch: true },
+                query: { shortlink: shortlink, parsed: parsed.parsed, dontFetch: true },
             }, `/?shortlink=${encodedShortlink}&parsed=${encodedParsed}&dontFetch=true`, { 
                 shallow: true 
             })
@@ -174,15 +173,15 @@ const Parser = (): JSX.Element => {
 
                         {(!parsing && error) && <ParserWait />}
 
-                        {(!parsing && !error) && <a href={parsed.url} 
+                        {(!parsing && !error) && <a href={parsed.parsed} 
                             className="truncate transition-colors duration-200 ease-in text-sh-300 hover:text-sh-100" 
                             target="_blank" 
                             rel="noreferrer"
                         >
-                            {parsed.url}
+                            {parsed.parsed}
                         </a>}
 
-                        {(!parsing && !error && parsed.url === '') && 'Menunggu...'}
+                        {(!parsing && !error && parsed.parsed === '') && 'Menunggu...'}
                     </div>
                 </div>
 
@@ -202,7 +201,7 @@ const Parser = (): JSX.Element => {
 
                         {(!parsing && error) && <ParserWait />}
 
-                        {(!parsing && !error && parsed.url !== '') && <>
+                        {(!parsing && !error && parsed.parsed !== '') && <>
                             <span className="italic uppercase">{parsed.cached.toString()}</span>
                             <div title="Menandakan apakah tautan ini telah diproses sebelumnya.">
                                 <svg className="w-4 h-4 ml-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -211,7 +210,7 @@ const Parser = (): JSX.Element => {
                             </div>
                         </>}
 
-                        {(!parsing && !error && parsed.url === '') && 'Menunggu...'}
+                        {(!parsing && !error && parsed.parsed === '') && 'Menunggu...'}
                     </div>
                 </div>
             </div>
