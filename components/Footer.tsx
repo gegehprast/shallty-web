@@ -7,7 +7,7 @@ interface Props {
 
 const Footer = ({ textClass, linkClass }: Props): JSX.Element => {
     return (
-        <div className="relative flex flex-row justify-center w-screen mx-auto text-sm text-gray-400 md:text-base">
+        <div className="relative flex flex-row justify-center w-screen mx-auto text-sm md:text-base">
             <div className="flex flex-wrap items-center justify-around w-full px-2 mt-auto mb-8 md:px-8 md:w-11/12 lg:w-5/6 xl:w-1/2">
                 <div className={`w-full mt-4 md:w-1/2 md:mt-0 ${textClass}`}>
                     © { (new Date).getFullYear() } shallty.moe {process.env.NEXT_PUBLIC_APP_VERSION}
