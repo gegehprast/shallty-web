@@ -4,7 +4,7 @@ const SuccessAlert = (): JSX.Element => {
             <p className="mb-1 text-lg font-bold">Success</p>
 
             <p className="w-full mb-1 text-sm md:text-base">
-                Membuka tautan asli di tab baru...
+                Membuka tautan hasil di tab baru...
             </p>
             
             <p className="w-full mb-1 text-sm md:text-base">
