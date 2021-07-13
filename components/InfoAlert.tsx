@@ -6,7 +6,7 @@ const InfoAlert = ({ handleReparse }: { handleReparse: () => void }): JSX.Elemen
                 className="font-bold text-sh-300 hover:text-sh-100"
                 onClick={handleReparse}
             >
-                Klik di sini untuk mengambil lagi.
+                Klik di sini untuk mencoba bypass lagi.
             </button>
         </div>
     )
