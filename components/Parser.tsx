@@ -8,10 +8,12 @@ import SuccessAlert from './SuccessAlert'
 import InfoAlert from './InfoAlert'
 import { dismissToast, showToast } from '../utils/toast'
 import ParserError from './ParserError'
+import FirstTimeVisitAlert from './FirstTimeVisitAlert'
 
 const SUCCESS_TOAST = 'SUCCESS_TOAST'
 const INFO_TOAST = 'INFO_TOAST'
 const ERROR_TOAST = 'ERROR_TOAST'
+const FIRST_TIME_TOAST = 'FIRST_TIME_TOAST'
 const host = process.env.NEXT_PUBLIC_SOCKET_HOST
 const client = io(host)
 
@@ -52,11 +54,16 @@ const Parser = (): JSX.Element => {
     const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        client.on('parse', function (res: Parsed) {
-            // dismiss all toast
+        const dismisssAllToast = () => {
             dismissToast(SUCCESS_TOAST)
             dismissToast(INFO_TOAST)
             dismissToast(ERROR_TOAST)
+            dismissToast(FIRST_TIME_TOAST)
+        }
+
+        client.on('parse', function (res: Parsed) {
+            // dismiss all toast
+            dismisssAllToast()
 
             if (res.success) {
                 setError(false)
@@ -92,6 +99,16 @@ const Parser = (): JSX.Element => {
                     type: 'error',
                 })
             }
+        })
+
+        client.on('firstimevisit', function () {
+            // dismiss all toast
+            dismisssAllToast()
+
+            showToast(<FirstTimeVisitAlert />, {
+                id: FIRST_TIME_TOAST,
+                type: 'info',
+            })
         })
 
         inputRef.current.focus()
