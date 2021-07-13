@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify'
 import MetaHead from '../components/MetaHead'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 const Maintenance = (): JSX.Element => {
     const router = useRouter()

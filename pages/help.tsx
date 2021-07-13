@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import MetaHead from '../components/MetaHead'
 import { ToastContainer } from 'react-toastify'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 const Help = (): JSX.Element => {
     return (

@@ -3,7 +3,7 @@ import MetaHead from '../components/MetaHead'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Parser from '../components/Parser'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 const Home = (): JSX.Element => {
     const router = useRouter()
