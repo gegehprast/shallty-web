@@ -20,6 +20,8 @@ const Help = (): JSX.Element => {
                     <ol>
                         <li className="mt-1"> - teknoku</li>
                         <li className="mt-1"> - drivemoe</li>
+                        <li className="mt-1"> - semawur</li>
+                        <li className="mt-1"> - moenesia</li>
                     </ol>
                 </div>
 
